@@ -18,14 +18,14 @@ declare module "@mui/material/Typography" {
 export const typography: TypographyOptions = {
   fontFamily: "Pacifico",
   h1: {
-    fontFamily: "cursive",
+    fontFamily: "sans-serif",
     fontSize: 50,
   },
   poster: {
-    fontSize: "4rem",
+    fontSize: 30,
   },
   subtitle1: {
-    fontSize: 11,
+    fontSize: 21,
   },
   h3: undefined,
 };
