@@ -1,28 +1,34 @@
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import "./App.css";
 import { ThemeVariantsProps, theme } from "./theme";
-import { ThemeProvider } from "@mui/material";
+import { ThemeProvider, Typography } from "@mui/material";
 import { Button, Switch } from "./components";
 
 function App() {
-  const [activeScheme, setActiveScheme] = useState<ThemeVariantsProps>(
+  const [mode, setMode] = useState<ThemeVariantsProps>(
     ThemeVariantsProps.light
   );
-  const activeTheme = theme(activeScheme);
+  const activeTheme = useMemo(() => theme(mode), [mode]);
+
+  const handleOnChange = useCallback(
+    () =>
+      setMode(
+        mode === ThemeVariantsProps.light
+          ? ThemeVariantsProps.dark
+          : ThemeVariantsProps.light
+      ),
+    [mode]
+  );
 
   return (
     <ThemeProvider theme={activeTheme}>
-      <Button>primary</Button>
-      <Button variant="secondary">secondary</Button>
-      <Switch
-        onChange={() =>
-          setActiveScheme(
-            activeScheme === ThemeVariantsProps.light
-              ? ThemeVariantsProps.dark
-              : ThemeVariantsProps.light
-          )
-        }
-      />
+      <Button>
+        <Typography>Primary</Typography>
+      </Button>
+      <Button variant="secondary">
+        <Typography>Secondary</Typography>
+      </Button>
+      <Switch onChange={handleOnChange} />
     </ThemeProvider>
   );
 }
